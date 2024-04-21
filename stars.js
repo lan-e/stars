@@ -1,38 +1,50 @@
 let stars = [];
-let speedSlider, speedSliderLabel, dirSlider, dirSliderLabel;
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
+let speed, speedSlider, speedSliderLabel, dirSlider, dirSliderLabel;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight, WEBGL);
+  speed = createVector(0, 0, 1);
 
   speedSlider = createSlider(1, 9, 5);
   speedSlider.position(10, 120);
+  speedSlider.input(updateSpeed);
   speedSlider.class("speed");
   speedSliderLabel = createDiv("Speed");
   speedSliderLabel.position(180, 120);
 
-  dirSlider = createSlider(-15, 15, 0);
-  dirSlider.position(10, 160);
+  dirSlider = createSlider(0, 1);
+  dirSlider.position(120, 160);
   dirSlider.class("direction");
+  dirSlider.input(updateDirection);
   dirSliderLabel = createDiv("Direction");
   dirSliderLabel.position(180, 160);
 
-  for (let i = 0; i < 800; i++) {
+  for (let i = 0; i < 1000; i++) {
     stars.push(new Star());
   }
 }
 
+function updateDirection() {
+  if (dirSlider.value() === 1) {
+    speed.z = abs(speed.z);
+  } else if (dirSlider.value() === 0) {
+    speed.z = -abs(speed.z);
+  }
+}
+
+function updateSpeed() {
+  let currentDirection = speed.z >= 0 ? 1 : -1;
+
+  speed.z = speedSlider.value() * currentDirection;
+}
+
 function draw() {
   background(0);
-  translate(width / 2, height / 2);
+  translate(0, 0, -1000);
 
-  // Move the stars
-  for (let star of stars) {
-    star.update();
-    star.show();
+  for (let i = 0; i < stars.length; i++) {
+    stars[i].update();
+    stars[i].show();
   }
 }
 
@@ -40,12 +52,12 @@ class Star {
   constructor() {
     this.x = random(-width, width);
     this.y = random(-height, height);
-    this.z = random(width);
+    this.z = random(0, width);
     this.pz = this.z;
   }
 
   update() {
-    this.z = this.z - speedSlider.value();
+    this.z -= speed.z;
 
     if (this.z < 1) {
       this.z = width;
@@ -53,8 +65,6 @@ class Star {
       this.y = random(-height, height);
       this.pz = this.z;
     }
-
-    this.y += dirSlider.value();
   }
 
   show() {
