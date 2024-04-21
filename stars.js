@@ -1,6 +1,10 @@
 let stars = [];
 let speed, speedSlider, speedSliderLabel, dirSlider, dirSliderLabel;
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   speed = createVector(0, 0, 1);
