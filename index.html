@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script language="javascript" type="text/javascript" src="libraries/p5.min.js"></script>
+  <script language="javascript" type="text/javascript" src="stars.js"></script>
+
+  <style>
+    body {
+      font-family: Roboto;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      color: #1041e2;
+      font-weight: 500;
+    }
+
+    .welcomeMsg {
+      position: absolute;
+      background: rgb(28, 6, 124);
+      color: #fff;
+      opacity: 0.8;
+      width: 220px;
+      font-weight: 400;
+      font-size: 20px;
+      padding: 16px;
+      border-bottom-right-radius: 8px;
+    }
+
+    .speed {
+      -webkit-appearance: none;
+      height: 15px;
+      background: rgb(28, 6, 124);
+      outline: none;
+      opacity: 0.8;
+      border-radius: 8px;
+    }
+
+    .speed::-moz-range-thumb {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: none;
+      background: #1041e2;
+      cursor: pointer;
+    }
+
+    .direction {
+      -webkit-appearance: none;
+      height: 15px;
+      background: rgb(76, 6, 94);
+      outline: none;
+      opacity: 0.8;
+      border-radius: 8px;
+    }
+
+    .direction::-moz-range-thumb {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: none;
+      background: #8d16dd;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="welcomeMsg">
+    Change stars speed or direction with these sliders! 👨‍🚀🌠🌌
+  </div>
+</body>
+
+</html>
